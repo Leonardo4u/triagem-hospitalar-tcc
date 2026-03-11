@@ -7,3 +7,4 @@ modelo.pkl
 .venv/
 __pycache__/
 *.pyc
+triagem.db
