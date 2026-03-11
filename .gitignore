@@ -1,0 +1,9 @@
+# Large data/model artifacts
+5v_cleandf.rdata
+data/dataset_limpo.csv
+modelo.pkl
+
+# Local environment
+.venv/
+__pycache__/
+*.pyc
