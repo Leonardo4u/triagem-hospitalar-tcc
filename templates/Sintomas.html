@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem Hospitalar — Sintomas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="header">
+    <h1>🏥 Sistema de Triagem Hospitalar</h1>
+    <p>Informe os sinais vitais e sintomas do paciente</p>
+  </div>
+
+  <div class="steps">
+    <div class="step done">
+      <div class="num">✓</div> Cadastro
+    </div>
+    <div class="step-line"></div>
+    <div class="step active">
+      <div class="num">2</div> Sintomas
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="num">3</div> Resultado
+    </div>
+  </div>
+
+  <div class="card">
+    <form method="POST" action="/sintomas">
+
+      <!-- Sinais Vitais -->
+      <div class="section-title">📊 Sinais Vitais</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="temp">Temperatura (°C)</label>
+          <input type="number" id="temp" name="temp"
+                 value="36.5" min="34" max="42" step="0.1" required>
+        </div>
+        <div class="form-group">
+          <label for="freq_card">Freq. Cardíaca (bpm)</label>
+          <input type="number" id="freq_card" name="freq_card"
+                 value="80" min="30" max="250" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="pressao_s">Pressão Sistólica (mmHg)</label>
+          <input type="number" id="pressao_s" name="pressao_s"
+                 value="120" min="50" max="250" required>
+        </div>
+        <div class="form-group">
+          <label for="pressao_d">Pressão Diastólica (mmHg)</label>
+          <input type="number" id="pressao_d" name="pressao_d"
+                 value="80" min="30" max="150" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="spo2">Saturação O2 (%)</label>
+          <input type="number" id="spo2" name="spo2"
+                 value="98" min="50" max="100" required>
+        </div>
+        <div class="form-group">
+          <label for="freq_resp">Freq. Respiratória (rpm)</label>
+          <input type="number" id="freq_resp" name="freq_resp"
+                 value="16" min="5" max="60" required>
+        </div>
+      </div>
+
+      <!-- Nível de dor -->
+      <div class="section-title">😣 Nível de Dor</div>
+      <div class="form-group">
+        <div class="slider-value" id="dor_value">0</div>
+        <div class="slider-wrap">
+          <input type="range" id="nivel_dor" name="nivel_dor"
+                 min="0" max="10" value="0">
+          <div class="slider-labels">
+            <span>0 — Sem dor</span>
+            <span>10 — Dor máxima</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sintomas -->
+      <div class="section-title">🩺 Sintomas</div>
+
+      <div class="region-tabs">
+        <div class="region-tab" data-region="cabeca">🧠 Cabeça</div>
+        <div class="region-tab" data-region="torax">🫀 Tórax</div>
+        <div class="region-tab" data-region="abdomen">🫃 Abdômen</div>
+        <div class="region-tab" data-region="membros">🦵 Membros</div>
+        <div class="region-tab" data-region="geral">🌡️ Geral</div>
+      </div>
+
+      <!-- Cabeça -->
+      <div class="sintomas-grid" id="grid-cabeca">
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_headache" name="cc_headache">
+          <label for="cc_headache">Dor de cabeça</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_dizziness" name="cc_dizziness">
+          <label for="cc_dizziness">Tontura</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_confusion" name="cc_confusion">
+          <label for="cc_confusion">Confusão mental</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_lossofconsciousness" name="cc_lossofconsciousness">
+          <label for="cc_lossofconsciousness">Perda de consciência</label>
+        </div>
+      </div>
+
+      <!-- Tórax -->
+      <div class="sintomas-grid" id="grid-torax">
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_chestpain" name="cc_chestpain">
+          <label for="cc_chestpain">Dor no peito</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_shortnessofbreath" name="cc_shortnessofbreath">
+          <label for="cc_shortnessofbreath">Falta de ar</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_palpitations" name="cc_palpitations">
+          <label for="cc_palpitations">Palpitações</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_respiratorydistress" name="cc_respiratorydistress">
+          <label for="cc_respiratorydistress">Dificuldade respiratória</label>
+        </div>
+      </div>
+
+      <!-- Abdômen -->
+      <div class="sintomas-grid" id="grid-abdomen">
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_abdominalpain" name="cc_abdominalpain">
+          <label for="cc_abdominalpain">Dor abdominal</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_nausea" name="cc_nausea">
+          <label for="cc_nausea">Náusea</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_emesis" name="cc_emesis">
+          <label for="cc_emesis">Vômito</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_diarrhea" name="cc_diarrhea">
+          <label for="cc_diarrhea">Diarreia</label>
+        </div>
+      </div>
+
+      <!-- Membros -->
+      <div class="sintomas-grid" id="grid-membros">
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_legpain" name="cc_legpain">
+          <label for="cc_legpain">Dor nas pernas</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_legswelling" name="cc_legswelling">
+          <label for="cc_legswelling">Inchaço nas pernas</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_armpain" name="cc_armpain">
+          <label for="cc_armpain">Dor nos braços</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_numbness" name="cc_numbness">
+          <label for="cc_numbness">Dormência</label>
+        </div>
+      </div>
+
+      <!-- Geral -->
+      <div class="sintomas-grid" id="grid-geral">
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_fever" name="cc_fever">
+          <label for="cc_fever">Febre</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_fatigue" name="cc_fatigue">
+          <label for="cc_fatigue">Fadiga</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_weakness" name="cc_weakness">
+          <label for="cc_weakness">Fraqueza</label>
+        </div>
+        <div class="sintoma-item">
+          <input type="checkbox" id="cc_chills" name="cc_chills">
+          <label for="cc_chills">Calafrios</label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a href="/" class="btn btn-secondary">← Voltar</a>
+        <button type="submit" class="btn btn-primary">
+          Ver Resultado →
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

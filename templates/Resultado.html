@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem Hospitalar — Resultado</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="header">
+    <h1>🏥 Sistema de Triagem Hospitalar</h1>
+    <p>Resultado da análise de triagem</p>
+  </div>
+
+  <div class="steps">
+    <div class="step done">
+      <div class="num">✓</div> Cadastro
+    </div>
+    <div class="step-line"></div>
+    <div class="step done">
+      <div class="num">✓</div> Sintomas
+    </div>
+    <div class="step-line"></div>
+    <div class="step active">
+      <div class="num">3</div> Resultado
+    </div>
+  </div>
+
+  <div class="card resultado-card">
+
+    <div class="resultado-badge badge-{{ cor }}">
+      ESI {{ esi }}
+    </div>
+
+    <div class="resultado-esi cor-{{ cor }}">{{ esi }}</div>
+    <div class="resultado-nome">{{ nome }}</div>
+    <div class="resultado-tempo">⏱ {{ tempo }}</div>
+
+    <!-- Barras de confiança -->
+    <div class="section-title">📊 Confiança do Modelo</div>
+    <div class="proba-list">
+      {% for item in proba %}
+      <div class="proba-item">
+        <div class="proba-header">
+          <span>ESI {{ item.esi }} — {{ item.nome }}</span>
+          <span>{{ item.pct }}%</span>
+        </div>
+        <div class="proba-bar-bg">
+          <div class="proba-bar-fill fill-{{ item.cor }}"
+               data-pct="{{ item.pct }}" style="width: 0%">
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="aviso">
+      ⚠️ Este resultado é uma sugestão de apoio à decisão clínica.
+      A avaliação final é responsabilidade do profissional de saúde.
+    </div>
+
+    <div class="btn-row" style="margin-top: 28px; justify-content: center;">
+      <a href="/nova" class="btn btn-primary">🔄 Nova Triagem</a>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
