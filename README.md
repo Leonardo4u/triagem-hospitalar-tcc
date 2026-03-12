@@ -1,5 +1,12 @@
 # Sistema de Triagem Hospitalar (TCC)
 
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=flat&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-3.1-000000?style=flat&logo=flask&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.8-F7931E?style=flat&logo=scikit-learn&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-2.3-150458?style=flat&logo=pandas&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat&logo=sqlite&logoColor=white)
+![Git LFS](https://img.shields.io/badge/Git%20LFS-F64935?style=flat&logo=git&logoColor=white)
+
 Aplicacao web para apoio a triagem hospitalar com:
 
 - Cadastro de paciente
